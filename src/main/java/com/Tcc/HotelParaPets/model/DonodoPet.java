@@ -1,11 +1,12 @@
 package com.Tcc.HotelParaPets.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 @ToString
@@ -23,21 +24,22 @@ public class DonodoPet  {
     @Column(name= "cpf")
     private String cpf;
 
-//para caso nao existir o  usuario é criado por persistencia
+    //para caso nao existir o  usuario é criado por persistencia
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name= "id_usuario")
+    @JoinColumn(name = "id_usuario")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name= "id_pet")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_pet")
     private Pet pet;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name= "id_endereco")
+    //
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name= "id_telefone")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_telefone")
     private Telefone telefone;
 
 
