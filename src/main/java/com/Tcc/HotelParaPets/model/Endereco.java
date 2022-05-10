@@ -9,7 +9,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
 @Entity
 @Table(name = "endereco")
 public class Endereco {

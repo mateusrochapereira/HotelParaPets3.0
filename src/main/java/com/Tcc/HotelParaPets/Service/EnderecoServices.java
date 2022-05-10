@@ -1,18 +1,17 @@
 package com.Tcc.HotelParaPets.Service;
 
 import com.Tcc.HotelParaPets.model.Endereco;
-import com.Tcc.HotelParaPets.model.Telefone;
 import com.Tcc.HotelParaPets.repositories.EnderecoRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EnderecoServices {
-    private EnderecoRepository enderecoRepository;
+    private final EnderecoRepository enderecoRepository;
 
     public void salvarEndereco(Endereco endereco) {
         enderecoRepository.save(endereco);

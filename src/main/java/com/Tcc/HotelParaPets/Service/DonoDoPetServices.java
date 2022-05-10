@@ -2,8 +2,9 @@ package com.Tcc.HotelParaPets.Service;
 
 import com.Tcc.HotelParaPets.Service.mapper.DonoDoPetMapper;
 import com.Tcc.HotelParaPets.model.DonodoPet;
+import com.Tcc.HotelParaPets.model.exception.DonoDoPetNaoEncontradoException;
 import com.Tcc.HotelParaPets.repositories.DonoDoPetRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
+
 public class DonoDoPetServices {
     private final DonoDoPetRepository donodoPetRepository;
 
@@ -35,14 +37,15 @@ public class DonoDoPetServices {
     }
 
 
-    public ResponseEntity<DonodoPet> atualizarDonoDoPet(Integer id, DonodoPet donodoPetAtualizado) {
+    public DonodoPet atualizarDonoDoPet(Integer id, DonodoPet donodoPetAtualizado) {
 
         //onodoPetDesatualizado vai ser o objeto que vai retornar , é diferente do donodoPetAtualizado que ta se passado em cima
-        DonodoPet donodoPetDesatualizado = donodoPetRepository.findById(id).orElseThrow(RuntimeException::new); // TODO: 07/05/2022 tratar essa secao
+        DonodoPet donodoPetDesatualizado = donodoPetRepository.findById(id)
+                .orElseThrow(DonoDoPetNaoEncontradoException::new);
         //copiando tudo de dentro do donodoPetAtualizado para dentro do donodoPetDesatualizado
         DonodoPet donodoPetBd = DonoDoPetMapper.convert(donodoPetAtualizado, donodoPetDesatualizado);
-        donodoPetRepository.save(donodoPetBd);
-        return ResponseEntity.ok().build(); // TODO: 07/05/2022 remover response entity e retornar entidade salva 
+        return donodoPetRepository.save(donodoPetBd);
+
      /*
       if(!donodoPetRepository.existsById(id)){
             return ResponseEntity.notFound().build();

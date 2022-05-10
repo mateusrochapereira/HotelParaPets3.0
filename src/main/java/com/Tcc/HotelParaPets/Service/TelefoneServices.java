@@ -1,18 +1,17 @@
 package com.Tcc.HotelParaPets.Service;
 
 import com.Tcc.HotelParaPets.model.Telefone;
-import com.Tcc.HotelParaPets.model.User;
 import com.Tcc.HotelParaPets.repositories.TelefoneRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TelefoneServices {
-    private TelefoneRepository telefoneRepository;
+    private final TelefoneRepository telefoneRepository;
 
     public void salvarTelefone(Telefone telefone) {
         telefoneRepository.save(telefone);
